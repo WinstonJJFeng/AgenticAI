@@ -1,0 +1,14 @@
+Convert this raw Markdown text into proper Google Docs formatting.
+Replace all Markdown syntax with the correct formatting styles:
+– #, ##, ### → Heading 1, Heading 2, Heading 3
+– **bold** → Bold text
+– *italic* → Italic text
+– - or * lists → Bulleted lists
+– 1. lists → Numbered lists
+– Code blocks → Monospaced code formatting
+– --- or *** → Horizontal rule
+
+Remove all Markdown symbols so none remain visible.
+Keep all original wording exactly the same.
+Do not paraphrase, summarize, or rewrite the content.
+Only apply formatting.
