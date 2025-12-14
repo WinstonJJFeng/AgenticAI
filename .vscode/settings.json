@@ -1,0 +1,57 @@
+{
+    // Python settings
+    "python.defaultInterpreterPath": "python3",
+    "python.linting.enabled": true,
+    "python.linting.pylintEnabled": false,
+    "python.linting.flake8Enabled": true,
+    "python.formatting.provider": "black",
+    "python.formatting.blackArgs": [
+        "--line-length=100"
+    ],
+    "python.analysis.typeCheckingMode": "basic",
+    "python.analysis.autoImportCompletions": true,
+    "python.analysis.completeFunctionParens": true,
+    
+    // Jupyter settings
+    "jupyter.jupyterServerType": "local",
+    "jupyter.askForKernelRestart": false,
+    "jupyter.allowImportFromNotebook": true,
+    
+    // Notebook settings
+    "notebook.defaultFormatter": "ms-python.black-formatter",
+    "notebook.formatOnSave": true,
+    
+    // Editor settings
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+        "source.organizeImports": "explicit"
+    },
+    
+    // File associations
+    "files.associations": {
+        "*.ipynb": "jupyter-notebook"
+    },
+    
+    // Terminal settings
+    "terminal.integrated.defaultProfile.osx": "zsh",
+    
+    // Exclude patterns for better performance
+    "files.exclude": {
+        "**/__pycache__": true,
+        "**/*.pyc": true,
+        "**/.pytest_cache": true,
+        "**/.mypy_cache": true
+    },
+    
+    // Search exclusions
+    "search.exclude": {
+        "**/__pycache__": true,
+        "**/*.pyc": true,
+        "**/node_modules": true,
+        "**/.git": true
+    },
+    "jupyter.interactiveWindow.creationMode": "perFile"
+}
+
+
+

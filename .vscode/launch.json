@@ -1,0 +1,48 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python: Current File",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "name": "Python: Current File (with arguments)",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "name": "Python: Debug Notebook",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "jupyter",
+            "args": [
+                "notebook",
+                "--no-browser",
+                "--ip=127.0.0.1"
+            ],
+            "console": "integratedTerminal",
+            "justMyCode": false
+        },
+        {
+            "name": "Python: Debug Jupyter Notebook",
+            "type": "debugpy",
+            "request": "attach",
+            "port": 5678,
+            "host": "localhost",
+            "justMyCode": false
+        }
+    ]
+}
+
+
+
