@@ -1,0 +1,853 @@
+{
+  "meta": {
+    "routes": [
+      {
+        "label": "outbound",
+        "origin": "SFO",
+        "destination": "CAN"
+      },
+      {
+        "label": "inbound",
+        "origin": "CAN",
+        "destination": "SFO"
+      }
+    ],
+    "month": "2026-11",
+    "max_duration_hours": 18,
+    "cabin_class": "economy",
+    "generated_at_utc": "2026-04-21T06:01:23.800764+00:00",
+    "api": "duffel",
+    "api_env": "sample",
+    "errors": [],
+    "note": "SAMPLE DATA for preview. Replaced by GitHub Actions daily run."
+  },
+  "days": {
+    "2026-11-01": {
+      "outbound": {
+        "price": 947,
+        "currency": "USD",
+        "duration_hours": 13.62,
+        "stops": 0,
+        "carriers": [
+          "UA"
+        ],
+        "depart_time": "2026-11-01T11:40:00",
+        "arrive_time": null,
+        "offer_id": "off_sample_SFO_CAN_01",
+        "deep_link": "https://www.google.com/travel/flights?q=Flights+from+SFO+to+CAN+on+2026-11-01"
+      },
+      "inbound": {
+        "price": 1001,
+        "currency": "USD",
+        "duration_hours": 17.05,
+        "stops": 1,
+        "carriers": [
+          "NH"
+        ],
+        "depart_time": "2026-11-01T16:50:00",
+        "arrive_time": null,
+        "offer_id": "off_sample_CAN_SFO_01",
+        "deep_link": "https://www.google.com/travel/flights?q=Flights+from+CAN+to+SFO+on+2026-11-01"
+      }
+    },
+    "2026-11-02": {
+      "outbound": {
+        "price": 746,
+        "currency": "USD",
+        "duration_hours": 13.3,
+        "stops": 0,
+        "carriers": [
+          "UA"
+        ],
+        "depart_time": "2026-11-02T23:10:00",
+        "arrive_time": null,
+        "offer_id": "off_sample_SFO_CAN_02",
+        "deep_link": "https://www.google.com/travel/flights?q=Flights+from+SFO+to+CAN+on+2026-11-02"
+      },
+      "inbound": {
+        "price": 1078,
+        "currency": "USD",
+        "duration_hours": 13.53,
+        "stops": 0,
+        "carriers": [
+          "JL"
+        ],
+        "depart_time": "2026-11-02T23:10:00",
+        "arrive_time": null,
+        "offer_id": "off_sample_CAN_SFO_02",
+        "deep_link": "https://www.google.com/travel/flights?q=Flights+from+CAN+to+SFO+on+2026-11-02"
+      }
+    },
+    "2026-11-03": {
+      "outbound": {
+        "price": 844,
+        "currency": "USD",
+        "duration_hours": 14.22,
+        "stops": 1,
+        "carriers": [
+          "CZ"
+        ],
+        "depart_time": "2026-11-03T11:40:00",
+        "arrive_time": null,
+        "offer_id": "off_sample_SFO_CAN_03",
+        "deep_link": "https://www.google.com/travel/flights?q=Flights+from+SFO+to+CAN+on+2026-11-03"
+      },
+      "inbound": {
+        "price": 886,
+        "currency": "USD",
+        "duration_hours": 14.89,
+        "stops": 1,
+        "carriers": [
+          "MU"
+        ],
+        "depart_time": "2026-11-03T08:15:00",
+        "arrive_time": null,
+        "offer_id": "off_sample_CAN_SFO_03",
+        "deep_link": "https://www.google.com/travel/flights?q=Flights+from+CAN+to+SFO+on+2026-11-03"
+      }
+    },
+    "2026-11-04": {
+      "outbound": {
+        "price": 677,
+        "currency": "USD",
+        "duration_hours": 15.55,
+        "stops": 1,
+        "carriers": [
+          "CZ",
+          "UA"
+        ],
+        "depart_time": "2026-11-04T13:25:00",
+        "arrive_time": null,
+        "offer_id": "off_sample_SFO_CAN_04",
+        "deep_link": "https://www.google.com/travel/flights?q=Flights+from+SFO+to+CAN+on+2026-11-04"
+      },
+      "inbound": {
+        "price": 692,
+        "currency": "USD",
+        "duration_hours": 17.23,
+        "stops": 1,
+        "carriers": [
+          "CX"
+        ],
+        "depart_time": "2026-11-04T08:15:00",
+        "arrive_time": null,
+        "offer_id": "off_sample_CAN_SFO_04",
+        "deep_link": "https://www.google.com/travel/flights?q=Flights+from+CAN+to+SFO+on+2026-11-04"
+      }
+    },
+    "2026-11-05": {
+      "outbound": {
+        "price": 912,
+        "currency": "USD",
+        "duration_hours": 15.16,
+        "stops": 1,
+        "carriers": [
+          "CZ",
+          "UA"
+        ],
+        "depart_time": "2026-11-05T11:40:00",
+        "arrive_time": null,
+        "offer_id": "off_sample_SFO_CAN_05",
+        "deep_link": "https://www.google.com/travel/flights?q=Flights+from+SFO+to+CAN+on+2026-11-05"
+      },
+      "inbound": {
+        "price": 705,
+        "currency": "USD",
+        "duration_hours": 13.58,
+        "stops": 0,
+        "carriers": [
+          "MU"
+        ],
+        "depart_time": "2026-11-05T08:15:00",
+        "arrive_time": null,
+        "offer_id": "off_sample_CAN_SFO_05",
+        "deep_link": "https://www.google.com/travel/flights?q=Flights+from+CAN+to+SFO+on+2026-11-05"
+      }
+    },
+    "2026-11-06": {
+      "outbound": {
+        "price": 849,
+        "currency": "USD",
+        "duration_hours": 17.55,
+        "stops": 1,
+        "carriers": [
+          "CX",
+          "KA"
+        ],
+        "depart_time": "2026-11-06T13:25:00",
+        "arrive_time": null,
+        "offer_id": "off_sample_SFO_CAN_06",
+        "deep_link": "https://www.google.com/travel/flights?q=Flights+from+SFO+to+CAN+on+2026-11-06"
+      },
+      "inbound": {
+        "price": 853,
+        "currency": "USD",
+        "duration_hours": 14.93,
+        "stops": 1,
+        "carriers": [
+          "JL"
+        ],
+        "depart_time": "2026-11-06T08:15:00",
+        "arrive_time": null,
+        "offer_id": "off_sample_CAN_SFO_06",
+        "deep_link": "https://www.google.com/travel/flights?q=Flights+from+CAN+to+SFO+on+2026-11-06"
+      }
+    },
+    "2026-11-07": {
+      "outbound": {
+        "price": 977,
+        "currency": "USD",
+        "duration_hours": 16.61,
+        "stops": 1,
+        "carriers": [
+          "CX",
+          "KA"
+        ],
+        "depart_time": "2026-11-07T16:50:00",
+        "arrive_time": null,
+        "offer_id": "off_sample_SFO_CAN_07",
+        "deep_link": "https://www.google.com/travel/flights?q=Flights+from+SFO+to+CAN+on+2026-11-07"
+      },
+      "inbound": {
+        "price": 1068,
+        "currency": "USD",
+        "duration_hours": 17.34,
+        "stops": 1,
+        "carriers": [
+          "JL"
+        ],
+        "depart_time": "2026-11-07T13:25:00",
+        "arrive_time": null,
+        "offer_id": "off_sample_CAN_SFO_07",
+        "deep_link": "https://www.google.com/travel/flights?q=Flights+from+CAN+to+SFO+on+2026-11-07"
+      }
+    },
+    "2026-11-08": {
+      "outbound": {
+        "price": 918,
+        "currency": "USD",
+        "duration_hours": 14.41,
+        "stops": 1,
+        "carriers": [
+          "CX",
+          "KA"
+        ],
+        "depart_time": "2026-11-08T13:25:00",
+        "arrive_time": null,
+        "offer_id": "off_sample_SFO_CAN_08",
+        "deep_link": "https://www.google.com/travel/flights?q=Flights+from+SFO+to+CAN+on+2026-11-08"
+      },
+      "inbound": {
+        "price": 963,
+        "currency": "USD",
+        "duration_hours": 14.46,
+        "stops": 1,
+        "carriers": [
+          "UA"
+        ],
+        "depart_time": "2026-11-08T16:50:00",
+        "arrive_time": null,
+        "offer_id": "off_sample_CAN_SFO_08",
+        "deep_link": "https://www.google.com/travel/flights?q=Flights+from+CAN+to+SFO+on+2026-11-08"
+      }
+    },
+    "2026-11-09": {
+      "outbound": {
+        "price": 932,
+        "currency": "USD",
+        "duration_hours": 17.23,
+        "stops": 1,
+        "carriers": [
+          "UA"
+        ],
+        "depart_time": "2026-11-09T11:40:00",
+        "arrive_time": null,
+        "offer_id": "off_sample_SFO_CAN_09",
+        "deep_link": "https://www.google.com/travel/flights?q=Flights+from+SFO+to+CAN+on+2026-11-09"
+      },
+      "inbound": {
+        "price": 1057,
+        "currency": "USD",
+        "duration_hours": 16.38,
+        "stops": 2,
+        "carriers": [
+          "NH"
+        ],
+        "depart_time": "2026-11-09T16:50:00",
+        "arrive_time": null,
+        "offer_id": "off_sample_CAN_SFO_09",
+        "deep_link": "https://www.google.com/travel/flights?q=Flights+from+CAN+to+SFO+on+2026-11-09"
+      }
+    },
+    "2026-11-10": {
+      "outbound": {
+        "price": 815,
+        "currency": "USD",
+        "duration_hours": 14.5,
+        "stops": 1,
+        "carriers": [
+          "CZ",
+          "UA"
+        ],
+        "depart_time": "2026-11-10T16:50:00",
+        "arrive_time": null,
+        "offer_id": "off_sample_SFO_CAN_10",
+        "deep_link": "https://www.google.com/travel/flights?q=Flights+from+SFO+to+CAN+on+2026-11-10"
+      },
+      "inbound": {
+        "price": 716,
+        "currency": "USD",
+        "duration_hours": 17.52,
+        "stops": 1,
+        "carriers": [
+          "UA"
+        ],
+        "depart_time": "2026-11-10T11:40:00",
+        "arrive_time": null,
+        "offer_id": "off_sample_CAN_SFO_10",
+        "deep_link": "https://www.google.com/travel/flights?q=Flights+from+CAN+to+SFO+on+2026-11-10"
+      }
+    },
+    "2026-11-11": {
+      "outbound": null,
+      "inbound": {
+        "price": 886,
+        "currency": "USD",
+        "duration_hours": 16.28,
+        "stops": 2,
+        "carriers": [
+          "NH"
+        ],
+        "depart_time": "2026-11-11T16:50:00",
+        "arrive_time": null,
+        "offer_id": "off_sample_CAN_SFO_11",
+        "deep_link": "https://www.google.com/travel/flights?q=Flights+from+CAN+to+SFO+on+2026-11-11"
+      }
+    },
+    "2026-11-12": {
+      "outbound": {
+        "price": 900,
+        "currency": "USD",
+        "duration_hours": 15.24,
+        "stops": 1,
+        "carriers": [
+          "CZ"
+        ],
+        "depart_time": "2026-11-12T23:10:00",
+        "arrive_time": null,
+        "offer_id": "off_sample_SFO_CAN_12",
+        "deep_link": "https://www.google.com/travel/flights?q=Flights+from+SFO+to+CAN+on+2026-11-12"
+      },
+      "inbound": {
+        "price": 806,
+        "currency": "USD",
+        "duration_hours": 17.82,
+        "stops": 1,
+        "carriers": [
+          "MU"
+        ],
+        "depart_time": "2026-11-12T16:50:00",
+        "arrive_time": null,
+        "offer_id": "off_sample_CAN_SFO_12",
+        "deep_link": "https://www.google.com/travel/flights?q=Flights+from+CAN+to+SFO+on+2026-11-12"
+      }
+    },
+    "2026-11-13": {
+      "outbound": {
+        "price": 810,
+        "currency": "USD",
+        "duration_hours": 15.5,
+        "stops": 1,
+        "carriers": [
+          "CZ",
+          "UA"
+        ],
+        "depart_time": "2026-11-13T11:40:00",
+        "arrive_time": null,
+        "offer_id": "off_sample_SFO_CAN_13",
+        "deep_link": "https://www.google.com/travel/flights?q=Flights+from+SFO+to+CAN+on+2026-11-13"
+      },
+      "inbound": {
+        "price": 1029,
+        "currency": "USD",
+        "duration_hours": 13.69,
+        "stops": 0,
+        "carriers": [
+          "MU"
+        ],
+        "depart_time": "2026-11-13T23:10:00",
+        "arrive_time": null,
+        "offer_id": "off_sample_CAN_SFO_13",
+        "deep_link": "https://www.google.com/travel/flights?q=Flights+from+CAN+to+SFO+on+2026-11-13"
+      }
+    },
+    "2026-11-14": {
+      "outbound": {
+        "price": 991,
+        "currency": "USD",
+        "duration_hours": 14.19,
+        "stops": 1,
+        "carriers": [
+          "CZ",
+          "UA"
+        ],
+        "depart_time": "2026-11-14T23:10:00",
+        "arrive_time": null,
+        "offer_id": "off_sample_SFO_CAN_14",
+        "deep_link": "https://www.google.com/travel/flights?q=Flights+from+SFO+to+CAN+on+2026-11-14"
+      },
+      "inbound": {
+        "price": 930,
+        "currency": "USD",
+        "duration_hours": 16.41,
+        "stops": 1,
+        "carriers": [
+          "CZ"
+        ],
+        "depart_time": "2026-11-14T13:25:00",
+        "arrive_time": null,
+        "offer_id": "off_sample_CAN_SFO_14",
+        "deep_link": "https://www.google.com/travel/flights?q=Flights+from+CAN+to+SFO+on+2026-11-14"
+      }
+    },
+    "2026-11-15": {
+      "outbound": {
+        "price": 1047,
+        "currency": "USD",
+        "duration_hours": 14.03,
+        "stops": 1,
+        "carriers": [
+          "CZ"
+        ],
+        "depart_time": "2026-11-15T16:50:00",
+        "arrive_time": null,
+        "offer_id": "off_sample_SFO_CAN_15",
+        "deep_link": "https://www.google.com/travel/flights?q=Flights+from+SFO+to+CAN+on+2026-11-15"
+      },
+      "inbound": {
+        "price": 965,
+        "currency": "USD",
+        "duration_hours": 17.77,
+        "stops": 1,
+        "carriers": [
+          "UA"
+        ],
+        "depart_time": "2026-11-15T16:50:00",
+        "arrive_time": null,
+        "offer_id": "off_sample_CAN_SFO_15",
+        "deep_link": "https://www.google.com/travel/flights?q=Flights+from+CAN+to+SFO+on+2026-11-15"
+      }
+    },
+    "2026-11-16": {
+      "outbound": {
+        "price": 1011,
+        "currency": "USD",
+        "duration_hours": 14.13,
+        "stops": 2,
+        "carriers": [
+          "UA"
+        ],
+        "depart_time": "2026-11-16T23:10:00",
+        "arrive_time": null,
+        "offer_id": "off_sample_SFO_CAN_16",
+        "deep_link": "https://www.google.com/travel/flights?q=Flights+from+SFO+to+CAN+on+2026-11-16"
+      },
+      "inbound": {
+        "price": 872,
+        "currency": "USD",
+        "duration_hours": 17.16,
+        "stops": 1,
+        "carriers": [
+          "CX"
+        ],
+        "depart_time": "2026-11-16T23:10:00",
+        "arrive_time": null,
+        "offer_id": "off_sample_CAN_SFO_16",
+        "deep_link": "https://www.google.com/travel/flights?q=Flights+from+CAN+to+SFO+on+2026-11-16"
+      }
+    },
+    "2026-11-17": {
+      "outbound": {
+        "price": 861,
+        "currency": "USD",
+        "duration_hours": 13.37,
+        "stops": 0,
+        "carriers": [
+          "CZ"
+        ],
+        "depart_time": "2026-11-17T13:25:00",
+        "arrive_time": null,
+        "offer_id": "off_sample_SFO_CAN_17",
+        "deep_link": "https://www.google.com/travel/flights?q=Flights+from+SFO+to+CAN+on+2026-11-17"
+      },
+      "inbound": {
+        "price": 680,
+        "currency": "USD",
+        "duration_hours": 16.53,
+        "stops": 1,
+        "carriers": [
+          "CZ"
+        ],
+        "depart_time": "2026-11-17T08:15:00",
+        "arrive_time": null,
+        "offer_id": "off_sample_CAN_SFO_17",
+        "deep_link": "https://www.google.com/travel/flights?q=Flights+from+CAN+to+SFO+on+2026-11-17"
+      }
+    },
+    "2026-11-18": {
+      "outbound": {
+        "price": 660,
+        "currency": "USD",
+        "duration_hours": 14.03,
+        "stops": 1,
+        "carriers": [
+          "MU"
+        ],
+        "depart_time": "2026-11-18T08:15:00",
+        "arrive_time": null,
+        "offer_id": "off_sample_SFO_CAN_18",
+        "deep_link": "https://www.google.com/travel/flights?q=Flights+from+SFO+to+CAN+on+2026-11-18"
+      },
+      "inbound": {
+        "price": 933,
+        "currency": "USD",
+        "duration_hours": 14.14,
+        "stops": 2,
+        "carriers": [
+          "UA"
+        ],
+        "depart_time": "2026-11-18T23:10:00",
+        "arrive_time": null,
+        "offer_id": "off_sample_CAN_SFO_18",
+        "deep_link": "https://www.google.com/travel/flights?q=Flights+from+CAN+to+SFO+on+2026-11-18"
+      }
+    },
+    "2026-11-19": {
+      "outbound": {
+        "price": 697,
+        "currency": "USD",
+        "duration_hours": 17.47,
+        "stops": 2,
+        "carriers": [
+          "UA"
+        ],
+        "depart_time": "2026-11-19T16:50:00",
+        "arrive_time": null,
+        "offer_id": "off_sample_SFO_CAN_19",
+        "deep_link": "https://www.google.com/travel/flights?q=Flights+from+SFO+to+CAN+on+2026-11-19"
+      },
+      "inbound": {
+        "price": 878,
+        "currency": "USD",
+        "duration_hours": 14.05,
+        "stops": 2,
+        "carriers": [
+          "MU"
+        ],
+        "depart_time": "2026-11-19T16:50:00",
+        "arrive_time": null,
+        "offer_id": "off_sample_CAN_SFO_19",
+        "deep_link": "https://www.google.com/travel/flights?q=Flights+from+CAN+to+SFO+on+2026-11-19"
+      }
+    },
+    "2026-11-20": {
+      "outbound": {
+        "price": 940,
+        "currency": "USD",
+        "duration_hours": 15.93,
+        "stops": 1,
+        "carriers": [
+          "CZ"
+        ],
+        "depart_time": "2026-11-20T08:15:00",
+        "arrive_time": null,
+        "offer_id": "off_sample_SFO_CAN_20",
+        "deep_link": "https://www.google.com/travel/flights?q=Flights+from+SFO+to+CAN+on+2026-11-20"
+      },
+      "inbound": {
+        "price": 976,
+        "currency": "USD",
+        "duration_hours": 17.17,
+        "stops": 1,
+        "carriers": [
+          "UA"
+        ],
+        "depart_time": "2026-11-20T11:40:00",
+        "arrive_time": null,
+        "offer_id": "off_sample_CAN_SFO_20",
+        "deep_link": "https://www.google.com/travel/flights?q=Flights+from+CAN+to+SFO+on+2026-11-20"
+      }
+    },
+    "2026-11-21": {
+      "outbound": {
+        "price": 987,
+        "currency": "USD",
+        "duration_hours": 16.47,
+        "stops": 2,
+        "carriers": [
+          "UA"
+        ],
+        "depart_time": "2026-11-21T13:25:00",
+        "arrive_time": null,
+        "offer_id": "off_sample_SFO_CAN_21",
+        "deep_link": "https://www.google.com/travel/flights?q=Flights+from+SFO+to+CAN+on+2026-11-21"
+      },
+      "inbound": {
+        "price": 1166,
+        "currency": "USD",
+        "duration_hours": 14.44,
+        "stops": 1,
+        "carriers": [
+          "CX"
+        ],
+        "depart_time": "2026-11-21T23:10:00",
+        "arrive_time": null,
+        "offer_id": "off_sample_CAN_SFO_21",
+        "deep_link": "https://www.google.com/travel/flights?q=Flights+from+CAN+to+SFO+on+2026-11-21"
+      }
+    },
+    "2026-11-22": {
+      "outbound": {
+        "price": 940,
+        "currency": "USD",
+        "duration_hours": 13.58,
+        "stops": 0,
+        "carriers": [
+          "CZ",
+          "UA"
+        ],
+        "depart_time": "2026-11-22T08:15:00",
+        "arrive_time": null,
+        "offer_id": "off_sample_SFO_CAN_22",
+        "deep_link": "https://www.google.com/travel/flights?q=Flights+from+SFO+to+CAN+on+2026-11-22"
+      },
+      "inbound": {
+        "price": 977,
+        "currency": "USD",
+        "duration_hours": 17.92,
+        "stops": 1,
+        "carriers": [
+          "CX"
+        ],
+        "depart_time": "2026-11-22T16:50:00",
+        "arrive_time": null,
+        "offer_id": "off_sample_CAN_SFO_22",
+        "deep_link": "https://www.google.com/travel/flights?q=Flights+from+CAN+to+SFO+on+2026-11-22"
+      }
+    },
+    "2026-11-23": {
+      "outbound": {
+        "price": 976,
+        "currency": "USD",
+        "duration_hours": 14.43,
+        "stops": 1,
+        "carriers": [
+          "UA"
+        ],
+        "depart_time": "2026-11-23T16:50:00",
+        "arrive_time": null,
+        "offer_id": "off_sample_SFO_CAN_23",
+        "deep_link": "https://www.google.com/travel/flights?q=Flights+from+SFO+to+CAN+on+2026-11-23"
+      },
+      "inbound": {
+        "price": 771,
+        "currency": "USD",
+        "duration_hours": 15.63,
+        "stops": 2,
+        "carriers": [
+          "MU"
+        ],
+        "depart_time": "2026-11-23T16:50:00",
+        "arrive_time": null,
+        "offer_id": "off_sample_CAN_SFO_23",
+        "deep_link": "https://www.google.com/travel/flights?q=Flights+from+CAN+to+SFO+on+2026-11-23"
+      }
+    },
+    "2026-11-24": {
+      "outbound": {
+        "price": 914,
+        "currency": "USD",
+        "duration_hours": 17.36,
+        "stops": 1,
+        "carriers": [
+          "UA"
+        ],
+        "depart_time": "2026-11-24T13:25:00",
+        "arrive_time": null,
+        "offer_id": "off_sample_SFO_CAN_24",
+        "deep_link": "https://www.google.com/travel/flights?q=Flights+from+SFO+to+CAN+on+2026-11-24"
+      },
+      "inbound": {
+        "price": 781,
+        "currency": "USD",
+        "duration_hours": 13.54,
+        "stops": 0,
+        "carriers": [
+          "NH"
+        ],
+        "depart_time": "2026-11-24T08:15:00",
+        "arrive_time": null,
+        "offer_id": "off_sample_CAN_SFO_24",
+        "deep_link": "https://www.google.com/travel/flights?q=Flights+from+CAN+to+SFO+on+2026-11-24"
+      }
+    },
+    "2026-11-25": {
+      "outbound": {
+        "price": 790,
+        "currency": "USD",
+        "duration_hours": 13.28,
+        "stops": 0,
+        "carriers": [
+          "CX",
+          "KA"
+        ],
+        "depart_time": "2026-11-25T23:10:00",
+        "arrive_time": null,
+        "offer_id": "off_sample_SFO_CAN_25",
+        "deep_link": "https://www.google.com/travel/flights?q=Flights+from+SFO+to+CAN+on+2026-11-25"
+      },
+      "inbound": {
+        "price": 941,
+        "currency": "USD",
+        "duration_hours": 14.03,
+        "stops": 1,
+        "carriers": [
+          "UA"
+        ],
+        "depart_time": "2026-11-25T08:15:00",
+        "arrive_time": null,
+        "offer_id": "off_sample_CAN_SFO_25",
+        "deep_link": "https://www.google.com/travel/flights?q=Flights+from+CAN+to+SFO+on+2026-11-25"
+      }
+    },
+    "2026-11-26": {
+      "outbound": {
+        "price": 934,
+        "currency": "USD",
+        "duration_hours": 13.59,
+        "stops": 0,
+        "carriers": [
+          "UA"
+        ],
+        "depart_time": "2026-11-26T16:50:00",
+        "arrive_time": null,
+        "offer_id": "off_sample_SFO_CAN_26",
+        "deep_link": "https://www.google.com/travel/flights?q=Flights+from+SFO+to+CAN+on+2026-11-26"
+      },
+      "inbound": {
+        "price": 731,
+        "currency": "USD",
+        "duration_hours": 16.37,
+        "stops": 1,
+        "carriers": [
+          "NH"
+        ],
+        "depart_time": "2026-11-26T08:15:00",
+        "arrive_time": null,
+        "offer_id": "off_sample_CAN_SFO_26",
+        "deep_link": "https://www.google.com/travel/flights?q=Flights+from+CAN+to+SFO+on+2026-11-26"
+      }
+    },
+    "2026-11-27": {
+      "outbound": {
+        "price": 944,
+        "currency": "USD",
+        "duration_hours": 17.29,
+        "stops": 1,
+        "carriers": [
+          "MU"
+        ],
+        "depart_time": "2026-11-27T11:40:00",
+        "arrive_time": null,
+        "offer_id": "off_sample_SFO_CAN_27",
+        "deep_link": "https://www.google.com/travel/flights?q=Flights+from+SFO+to+CAN+on+2026-11-27"
+      },
+      "inbound": null
+    },
+    "2026-11-28": {
+      "outbound": {
+        "price": 1050,
+        "currency": "USD",
+        "duration_hours": 14.13,
+        "stops": 1,
+        "carriers": [
+          "MU"
+        ],
+        "depart_time": "2026-11-28T16:50:00",
+        "arrive_time": null,
+        "offer_id": "off_sample_SFO_CAN_28",
+        "deep_link": "https://www.google.com/travel/flights?q=Flights+from+SFO+to+CAN+on+2026-11-28"
+      },
+      "inbound": {
+        "price": 1091,
+        "currency": "USD",
+        "duration_hours": 17.97,
+        "stops": 1,
+        "carriers": [
+          "CX"
+        ],
+        "depart_time": "2026-11-28T23:10:00",
+        "arrive_time": null,
+        "offer_id": "off_sample_CAN_SFO_28",
+        "deep_link": "https://www.google.com/travel/flights?q=Flights+from+CAN+to+SFO+on+2026-11-28"
+      }
+    },
+    "2026-11-29": {
+      "outbound": {
+        "price": 1178,
+        "currency": "USD",
+        "duration_hours": 13.29,
+        "stops": 0,
+        "carriers": [
+          "UA"
+        ],
+        "depart_time": "2026-11-29T23:10:00",
+        "arrive_time": null,
+        "offer_id": "off_sample_SFO_CAN_29",
+        "deep_link": "https://www.google.com/travel/flights?q=Flights+from+SFO+to+CAN+on+2026-11-29"
+      },
+      "inbound": {
+        "price": 1065,
+        "currency": "USD",
+        "duration_hours": 14.47,
+        "stops": 1,
+        "carriers": [
+          "UA"
+        ],
+        "depart_time": "2026-11-29T13:25:00",
+        "arrive_time": null,
+        "offer_id": "off_sample_CAN_SFO_29",
+        "deep_link": "https://www.google.com/travel/flights?q=Flights+from+CAN+to+SFO+on+2026-11-29"
+      }
+    },
+    "2026-11-30": {
+      "outbound": {
+        "price": 875,
+        "currency": "USD",
+        "duration_hours": 14.22,
+        "stops": 1,
+        "carriers": [
+          "CZ",
+          "UA"
+        ],
+        "depart_time": "2026-11-30T23:10:00",
+        "arrive_time": null,
+        "offer_id": "off_sample_SFO_CAN_30",
+        "deep_link": "https://www.google.com/travel/flights?q=Flights+from+SFO+to+CAN+on+2026-11-30"
+      },
+      "inbound": {
+        "price": 774,
+        "currency": "USD",
+        "duration_hours": 17.41,
+        "stops": 1,
+        "carriers": [
+          "JL"
+        ],
+        "depart_time": "2026-11-30T08:15:00",
+        "arrive_time": null,
+        "offer_id": "off_sample_CAN_SFO_30",
+        "deep_link": "https://www.google.com/travel/flights?q=Flights+from+CAN+to+SFO+on+2026-11-30"
+      }
+    }
+  }
+}

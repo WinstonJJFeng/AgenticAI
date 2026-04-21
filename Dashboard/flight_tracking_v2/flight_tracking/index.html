@@ -1,0 +1,302 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>SFO ⇄ CAN · Nov 2026 Fare Calendar</title>
+<style>
+  :root {
+    --bg: #0f1115;
+    --panel: #161a22;
+    --panel-2: #1d222c;
+    --border: #262c38;
+    --text: #e6ebf2;
+    --muted: #8a93a6;
+    --accent: #6ea8ff;
+    --cheap: #2a6b3a;
+    --cheap-2: #3aa35a;
+    --mid: #5d4f1d;
+    --mid-2: #c7a43a;
+    --exp: #6b2a2a;
+    --exp-2: #d96363;
+    --none: #2b2f3a;
+    --out: #6ea8ff;
+    --ret: #ffb36e;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); font: 14px/1.45 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 24px; }
+  h1 { font-size: 20px; margin: 0 0 4px; font-weight: 600; }
+  .sub { color: var(--muted); margin-bottom: 20px; font-size: 13px; }
+  .card { background: var(--panel); border: 1px solid var(--border); border-radius: 12px; padding: 18px; }
+  .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin-bottom: 16px; }
+  .stat { background: var(--panel-2); border: 1px solid var(--border); border-radius: 10px; padding: 12px 14px; }
+  .stat .label { color: var(--muted); font-size: 11px; text-transform: uppercase; letter-spacing: .04em; }
+  .stat .value { font-size: 16px; font-weight: 600; margin-top: 2px; }
+  .stat .hint { color: var(--muted); font-size: 11px; margin-top: 2px; }
+  .legend { display: flex; gap: 14px; align-items: center; color: var(--muted); font-size: 12px; margin: 14px 0; flex-wrap: wrap; }
+  .legend .sw { display: inline-block; width: 12px; height: 12px; border-radius: 3px; vertical-align: middle; margin-right: 6px; border: 1px solid var(--border); }
+  .legend .dir { display: inline-block; width: 14px; text-align: center; font-weight: 700; margin-right: 4px; }
+  .dir-out { color: var(--out); }
+  .dir-ret { color: var(--ret); }
+  table.cal { width: 100%; border-collapse: separate; border-spacing: 6px; table-layout: fixed; }
+  table.cal thead th { color: var(--muted); font-weight: 500; font-size: 11px; text-align: center; padding-bottom: 4px; text-transform: uppercase; letter-spacing: .05em; }
+  td.cell { background: var(--panel-2); border: 1px solid var(--border); border-radius: 8px; vertical-align: top; padding: 8px 10px; height: 100px; cursor: default; position: relative; transition: transform .08s ease, border-color .12s ease; }
+  td.cell.clickable { cursor: pointer; }
+  td.cell.clickable:hover { transform: translateY(-1px); border-color: var(--accent); }
+  td.cell .d { color: var(--muted); font-size: 11px; display: flex; justify-content: space-between; align-items: center; }
+  td.cell .leg { font-size: 13px; margin-top: 4px; display: flex; align-items: baseline; gap: 6px; }
+  td.cell .leg .arrow { font-weight: 700; font-size: 12px; width: 14px; text-align: center; }
+  td.cell .leg.out .arrow { color: var(--out); }
+  td.cell .leg.ret .arrow { color: var(--ret); }
+  td.cell .leg .p { font-weight: 600; font-size: 14px; }
+  td.cell .leg .dm { color: var(--muted); font-size: 11px; }
+  td.cell.empty { background: transparent; border: none; }
+  td.cell.none { background: var(--none); color: var(--muted); }
+  td.cell.past { opacity: .45; }
+  td.cell.cheap { background: linear-gradient(180deg, var(--cheap) 0%, #204d2c 100%); border-color: var(--cheap-2); }
+  td.cell.mid { background: linear-gradient(180deg, var(--mid) 0%, #3a3315 100%); border-color: var(--mid-2); }
+  td.cell.exp { background: linear-gradient(180deg, var(--exp) 0%, #4a1d1d 100%); border-color: var(--exp-2); }
+  td.cell.best-combo { outline: 2px solid var(--accent); outline-offset: 1px; }
+  .pill { display: inline-block; padding: 1px 6px; border-radius: 999px; font-size: 10px; font-weight: 600; letter-spacing: .02em; border: 1px solid transparent; }
+  .pill.out { color: var(--out); border-color: rgba(110,168,255,.45); background: rgba(110,168,255,.12); }
+  .pill.ret { color: var(--ret); border-color: rgba(255,179,110,.45); background: rgba(255,179,110,.15); }
+  .footer { color: var(--muted); font-size: 12px; margin-top: 16px; }
+  .error { color: #ff9090; font-size: 12px; margin-top: 8px; }
+  .detail { margin-top: 16px; padding: 14px; background: var(--panel-2); border: 1px solid var(--border); border-radius: 10px; display: none; }
+  .detail.show { display: block; }
+  .detail h3 { font-size: 13px; margin: 0 0 8px; color: var(--muted); text-transform: uppercase; letter-spacing: .05em; font-weight: 600; }
+  .detail .legsec { border-top: 1px solid var(--border); padding-top: 10px; margin-top: 10px; }
+  .detail .legsec:first-of-type { border-top: none; padding-top: 0; margin-top: 0; }
+  .detail .row { display: flex; gap: 12px; flex-wrap: wrap; }
+  .detail .field { min-width: 130px; }
+  .detail .field .k { color: var(--muted); font-size: 11px; text-transform: uppercase; letter-spacing: .04em; }
+  .detail .field .v { font-size: 14px; margin-top: 2px; }
+  .detail a { color: var(--accent); text-decoration: none; }
+  .detail a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>SFO ⇄ CAN · November 2026 Fare Calendar</h1>
+  <div class="sub">One-way fares in both directions, duration &lt; 18h. Cell color tracks the round-trip <em>total</em>; pills mark the cheapest day in each direction. Auto-refreshed daily at 8am PT.</div>
+
+  <div class="card">
+    <div id="stats" class="stats"></div>
+
+    <div class="legend">
+      <span><span class="dir dir-out">→</span>SFO → CAN (outbound)</span>
+      <span><span class="dir dir-ret">←</span>CAN → SFO (return)</span>
+      <span><span class="sw" style="background:linear-gradient(180deg,#3aa35a,#204d2c)"></span>Cheapest total</span>
+      <span><span class="sw" style="background:linear-gradient(180deg,#c7a43a,#3a3315)"></span>Middle</span>
+      <span><span class="sw" style="background:linear-gradient(180deg,#d96363,#4a1d1d)"></span>Most expensive</span>
+      <span><span class="sw" style="background:#2b2f3a"></span>Missing fare</span>
+    </div>
+
+    <table class="cal" id="cal" aria-label="Fare calendar">
+      <thead><tr>
+        <th>Sun</th><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th>
+      </tr></thead>
+      <tbody id="cal-body"></tbody>
+    </table>
+
+    <div id="detail" class="detail" aria-live="polite"></div>
+
+    <div id="meta" class="footer"></div>
+    <div id="err" class="error"></div>
+  </div>
+</div>
+
+<script>
+(async function () {
+  const calBody = document.getElementById("cal-body");
+  const statsEl = document.getElementById("stats");
+  const metaEl = document.getElementById("meta");
+  const errEl = document.getElementById("err");
+  const detailEl = document.getElementById("detail");
+
+  let payload;
+  try {
+    const res = await fetch("data/flights.json", { cache: "no-store" });
+    if (!res.ok) throw new Error("HTTP " + res.status);
+    payload = await res.json();
+  } catch (e) {
+    errEl.textContent = "Could not load data/flights.json — has the workflow run yet? (" + e.message + ")";
+    return;
+  }
+
+  const days = payload.days || {};
+  const meta = payload.meta || {};
+  const routes = meta.routes || [
+    { label: "outbound", origin: "SFO", destination: "CAN" },
+    { label: "inbound",  origin: "CAN", destination: "SFO" },
+  ];
+
+  // Normalize: some old payloads stored each day as a flat offer (pre-return-leg schema).
+  // Upgrade them in place so the rest of the code can assume {outbound, inbound}.
+  for (const [k, v] of Object.entries(days)) {
+    if (v && typeof v === "object" && (v.outbound !== undefined || v.inbound !== undefined)) continue;
+    days[k] = { outbound: v || null, inbound: null };
+  }
+
+  const [y, m] = (meta.month || Object.keys(days)[0]?.slice(0, 7) || "2026-11").split("-").map(Number);
+  const firstDow = new Date(y, m - 1, 1).getDay();
+  const lastDay = new Date(y, m, 0).getDate();
+
+  const fmt = (n) => "$" + Math.round(n).toLocaleString();
+
+  // Aggregate
+  const withOut = Object.entries(days).filter(([, v]) => v.outbound && typeof v.outbound.price === "number");
+  const withRet = Object.entries(days).filter(([, v]) => v.inbound  && typeof v.inbound.price  === "number");
+  const bothLegs = Object.entries(days).filter(
+    ([, v]) => v.outbound && v.inbound && typeof v.outbound.price === "number" && typeof v.inbound.price === "number"
+  );
+
+  const bestOut = withOut.slice().sort((a,b) => a[1].outbound.price - b[1].outbound.price)[0];
+  const bestRet = withRet.slice().sort((a,b) => a[1].inbound.price  - b[1].inbound.price )[0];
+
+  // "Cheapest round trip (same-day pair)" — not typical, but shown if any
+  // More useful: cheapest cross-day combo (pick any outbound + any inbound)
+  const bestCombo = (bestOut && bestRet) ? {
+    outDate: bestOut[0], retDate: bestRet[0],
+    total: bestOut[1].outbound.price + bestRet[1].inbound.price,
+    outPrice: bestOut[1].outbound.price, retPrice: bestRet[1].inbound.price,
+  } : null;
+
+  // Totals per day (for cell color) — only when both legs present
+  const totalsByDay = {};
+  for (const [k, v] of bothLegs) {
+    totalsByDay[k] = v.outbound.price + v.inbound.price;
+  }
+  const totals = Object.values(totalsByDay).sort((a,b) => a - b);
+  const cheapT = totals[Math.floor(totals.length / 3)] ?? Infinity;
+  const midT   = totals[Math.floor((2 * totals.length) / 3)] ?? Infinity;
+
+  const medianOut = withOut.length ? withOut.map(([,v]) => v.outbound.price).sort((a,b)=>a-b)[Math.floor(withOut.length/2)] : null;
+  const medianRet = withRet.length ? withRet.map(([,v]) => v.inbound.price).sort((a,b)=>a-b)[Math.floor(withRet.length/2)] : null;
+
+  statsEl.innerHTML = `
+    <div class="stat">
+      <div class="label">Cheapest outbound <span class="pill out" style="margin-left:6px">→</span></div>
+      <div class="value">${bestOut ? fmt(bestOut[1].outbound.price) : "—"}</div>
+      <div class="hint">${bestOut ? bestOut[0] : ""}</div>
+    </div>
+    <div class="stat">
+      <div class="label">Cheapest return <span class="pill ret" style="margin-left:6px">←</span></div>
+      <div class="value">${bestRet ? fmt(bestRet[1].inbound.price) : "—"}</div>
+      <div class="hint">${bestRet ? bestRet[0] : ""}</div>
+    </div>
+    <div class="stat">
+      <div class="label">Cheapest round-trip combo</div>
+      <div class="value">${bestCombo ? fmt(bestCombo.total) : "—"}</div>
+      <div class="hint">${bestCombo ? `${bestCombo.outDate.slice(5)} out + ${bestCombo.retDate.slice(5)} back` : ""}</div>
+    </div>
+    <div class="stat">
+      <div class="label">Median one-way</div>
+      <div class="value">${medianOut ? fmt(medianOut) : "—"} / ${medianRet ? fmt(medianRet) : "—"}</div>
+      <div class="hint">outbound / return</div>
+    </div>
+  `;
+
+  // Build calendar
+  const today = new Date(); today.setHours(0,0,0,0);
+  const rows = [];
+  let dayNum = 1;
+  for (let r = 0; r < 6; r++) {
+    const tds = [];
+    for (let c = 0; c < 7; c++) {
+      if ((r === 0 && c < firstDow) || dayNum > lastDay) {
+        tds.push(`<td class="cell empty"></td>`);
+        continue;
+      }
+      const key = `${y}-${String(m).padStart(2,"0")}-${String(dayNum).padStart(2,"0")}`;
+      const cellDate = new Date(y, m - 1, dayNum);
+      const entry = days[key] || { outbound: null, inbound: null };
+      const outE = entry.outbound, retE = entry.inbound;
+      const isPast = cellDate < today;
+
+      let cls = "cell";
+      const hasBoth = outE && retE && typeof outE.price === "number" && typeof retE.price === "number";
+      if (hasBoth) {
+        const total = outE.price + retE.price;
+        const bucket = total <= cheapT ? "cheap" : total <= midT ? "mid" : "exp";
+        cls += " " + bucket + " clickable";
+      } else if (outE || retE) {
+        cls += " clickable";
+      } else {
+        cls += " none";
+      }
+      if (bestOut && key === bestOut[0] && bestRet && key === bestRet[0]) cls += " best-combo";
+
+      const outBadge = bestOut && key === bestOut[0] ? `<span class="pill out">best →</span>` : "";
+      const retBadge = bestRet && key === bestRet[0] ? `<span class="pill ret">best ←</span>` : "";
+      const badges = [outBadge, retBadge].filter(Boolean).join(" ");
+
+      const outRow = outE && typeof outE.price === "number"
+        ? `<div class="leg out"><span class="arrow">→</span><span class="p">${fmt(outE.price)}</span><span class="dm">${outE.duration_hours}h · ${outE.stops===0?'nonstop':outE.stops+(outE.stops===1?' stop':' stops')}</span></div>`
+        : `<div class="leg out"><span class="arrow">→</span><span class="dm">—</span></div>`;
+      const retRow = retE && typeof retE.price === "number"
+        ? `<div class="leg ret"><span class="arrow">←</span><span class="p">${fmt(retE.price)}</span><span class="dm">${retE.duration_hours}h · ${retE.stops===0?'nonstop':retE.stops+(retE.stops===1?' stop':' stops')}</span></div>`
+        : `<div class="leg ret"><span class="arrow">←</span><span class="dm">—</span></div>`;
+
+      if (isPast) cls += " past";
+      tds.push(
+        `<td class="${cls}" data-key="${key}">` +
+          `<div class="d"><span>${dayNum}</span><span>${badges}</span></div>` +
+          outRow + retRow +
+        `</td>`
+      );
+      dayNum++;
+    }
+    rows.push(`<tr>${tds.join("")}</tr>`);
+    if (dayNum > lastDay) break;
+  }
+  calBody.innerHTML = rows.join("");
+
+  // Detail panel
+  calBody.addEventListener("click", (ev) => {
+    const td = ev.target.closest("td.cell.clickable");
+    if (!td) return;
+    const key = td.getAttribute("data-key");
+    const entry = days[key];
+    if (!entry) return;
+
+    const section = (label, arrow, dirClass, leg, routeDesc) => {
+      if (!leg || typeof leg.price !== "number") {
+        return `<div class="legsec"><h3><span class="dir ${dirClass}">${arrow}</span> ${label} — ${routeDesc}</h3><div class="row"><div class="field"><div class="k">Fare</div><div class="v">—</div></div></div></div>`;
+      }
+      const carriers = (leg.carriers || []).join(", ") || "—";
+      return `<div class="legsec">
+        <h3><span class="dir ${dirClass}">${arrow}</span> ${label} — ${routeDesc}</h3>
+        <div class="row">
+          <div class="field"><div class="k">Price</div><div class="v">${fmt(leg.price)} ${leg.currency || ""}</div></div>
+          <div class="field"><div class="k">Duration</div><div class="v">${leg.duration_hours}h</div></div>
+          <div class="field"><div class="k">Stops</div><div class="v">${leg.stops}</div></div>
+          <div class="field"><div class="k">Carriers</div><div class="v">${carriers}</div></div>
+          <div class="field"><div class="k">Depart</div><div class="v">${leg.depart_time || "—"}</div></div>
+          <div class="field"><div class="k">Arrive</div><div class="v">${leg.arrive_time || "—"}</div></div>
+          <div class="field"><div class="k">Search</div><div class="v"><a href="${leg.deep_link}" target="_blank" rel="noopener">Google Flights ↗</a></div></div>
+        </div>
+      </div>`;
+    };
+
+    const outRoute = `${routes[0].origin} → ${routes[0].destination}`;
+    const retRoute = `${routes[1].origin} → ${routes[1].destination}`;
+    detailEl.classList.add("show");
+    detailEl.innerHTML =
+      `<div style="margin-bottom:10px; font-weight:600;">${key}</div>` +
+      section("Outbound", "→", "dir-out", entry.outbound, outRoute) +
+      section("Return",   "←", "dir-ret", entry.inbound,  retRoute);
+  });
+
+  const gen = meta.generated_at_utc ? new Date(meta.generated_at_utc) : null;
+  const apiName = (meta.api || "duffel").charAt(0).toUpperCase() + (meta.api || "duffel").slice(1);
+  metaEl.textContent =
+    `${routes[0].origin} ⇄ ${routes[0].destination} · max ${meta.max_duration_hours || 18}h · data via ${apiName} (${meta.api_env || "test"}) · generated ${gen ? gen.toLocaleString() : "—"}`;
+  if (meta.errors && meta.errors.length) {
+    errEl.textContent = `${meta.errors.length} leg-query error(s) in last refresh — see data/flights.json.`;
+  }
+})();
+</script>
+</body>
+</html>
