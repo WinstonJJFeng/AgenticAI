@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>SFO → CAN · Nov 2026 Fare Calendar</title>
+<style>
+  :root {
+    --bg: #0f1115;
+    --panel: #161a22;
+    --panel-2: #1d222c;
+    --border: #262c38;
+    --text: #e6ebf2;
+    --muted: #8a93a6;
+    --accent: #6ea8ff;
+    --cheap: #2a6b3a;
+    --cheap-2: #3aa35a;
+    --mid: #5d4f1d;
+    --mid-2: #c7a43a;
+    --exp: #6b2a2a;
+    --exp-2: #d96363;
+    --none: #2b2f3a;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); font: 14px/1.45 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+  .wrap { max-width: 1040px; margin: 0 auto; padding: 24px; }
+  h1 { font-size: 20px; margin: 0 0 4px; font-weight: 600; }
+  .sub { color: var(--muted); margin-bottom: 20px; font-size: 13px; }
+  .card { background: var(--panel); border: 1px solid var(--border); border-radius: 12px; padding: 18px; }
+  .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; margin-bottom: 16px; }
+  .stat { background: var(--panel-2); border: 1px solid var(--border); border-radius: 10px; padding: 12px 14px; }
+  .stat .label { color: var(--muted); font-size: 11px; text-transform: uppercase; letter-spacing: .04em; }
+  .stat .value { font-size: 18px; font-weight: 600; margin-top: 2px; }
+  .legend { display: flex; gap: 14px; align-items: center; color: var(--muted); font-size: 12px; margin: 14px 0; flex-wrap: wrap; }
+  .legend .sw { display: inline-block; width: 12px; height: 12px; border-radius: 3px; vertical-align: middle; margin-right: 6px; border: 1px solid var(--border); }
+  table.cal { width: 100%; border-collapse: separate; border-spacing: 6px; table-layout: fixed; }
+  table.cal thead th { color: var(--muted); font-weight: 500; font-size: 11px; text-align: center; padding-bottom: 4px; text-transform: uppercase; letter-spacing: .05em; }
+  td.cell { background: var(--panel-2); border: 1px solid var(--border); border-radius: 8px; vertical-align: top; padding: 8px 10px; height: 88px; cursor: default; position: relative; transition: transform .08s ease, border-color .12s ease; }
+  td.cell.clickable { cursor: pointer; }
+  td.cell.clickable:hover { transform: translateY(-1px); border-color: var(--accent); }
+  td.cell .d { color: var(--muted); font-size: 11px; }
+  td.cell .p { font-size: 18px; font-weight: 600; margin-top: 6px; }
+  td.cell .m { color: var(--muted); font-size: 11px; margin-top: 2px; }
+  td.cell.empty { background: transparent; border: none; }
+  td.cell.none { background: var(--none); color: var(--muted); }
+  td.cell.past { opacity: .45; }
+  td.cell.cheap { background: linear-gradient(180deg, var(--cheap) 0%, #204d2c 100%); border-color: var(--cheap-2); }
+  td.cell.mid { background: linear-gradient(180deg, var(--mid) 0%, #3a3315 100%); border-color: var(--mid-2); }
+  td.cell.exp { background: linear-gradient(180deg, var(--exp) 0%, #4a1d1d 100%); border-color: var(--exp-2); }
+  td.cell.best { outline: 2px solid var(--accent); outline-offset: 1px; }
+  .footer { color: var(--muted); font-size: 12px; margin-top: 16px; }
+  .error { color: #ff9090; font-size: 12px; margin-top: 8px; }
+  .detail { margin-top: 16px; padding: 14px; background: var(--panel-2); border: 1px solid var(--border); border-radius: 10px; display: none; }
+  .detail.show { display: block; }
+  .detail .row { display: flex; gap: 12px; flex-wrap: wrap; }
+  .detail .field { min-width: 140px; }
+  .detail .field .k { color: var(--muted); font-size: 11px; text-transform: uppercase; letter-spacing: .04em; }
+  .detail .field .v { font-size: 14px; margin-top: 2px; }
+  .detail a { color: var(--accent); text-decoration: none; }
+  .detail a:hover { text-decoration: underline; }
+  .pill { display: inline-block; background: rgba(110,168,255,.12); color: var(--accent); border: 1px solid rgba(110,168,255,.35); padding: 2px 8px; border-radius: 999px; font-size: 11px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>SFO → CAN · November 2026 Fare Calendar</h1>
+  <div class="sub">One-way fares, itineraries with total duration &lt; 18h. Cheapest option per day. Auto-refreshed daily at 8am PT.</div>
+
+  <div class="card">
+    <div id="stats" class="stats"></div>
+
+    <div class="legend">
+      <span><span class="sw" style="background:linear-gradient(180deg,#3aa35a,#204d2c)"></span>Cheapest third</span>
+      <span><span class="sw" style="background:linear-gradient(180deg,#c7a43a,#3a3315)"></span>Middle</span>
+      <span><span class="sw" style="background:linear-gradient(180deg,#d96363,#4a1d1d)"></span>Most expensive third</span>
+      <span><span class="sw" style="background:#2b2f3a"></span>No itinerary &lt; 18h</span>
+      <span><span class="pill">best</span>overall cheapest</span>
+    </div>
+
+    <table class="cal" id="cal" aria-label="Fare calendar">
+      <thead><tr>
+        <th>Sun</th><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th>
+      </tr></thead>
+      <tbody id="cal-body"></tbody>
+    </table>
+
+    <div id="detail" class="detail" aria-live="polite"></div>
+
+    <div id="meta" class="footer"></div>
+    <div id="err" class="error"></div>
+  </div>
+</div>
+
+<script>
+(async function () {
+  const calBody = document.getElementById("cal-body");
+  const statsEl = document.getElementById("stats");
+  const metaEl = document.getElementById("meta");
+  const errEl = document.getElementById("err");
+  const detailEl = document.getElementById("detail");
+
+  let payload;
+  try {
+    const res = await fetch("data/flights.json", { cache: "no-store" });
+    if (!res.ok) throw new Error("HTTP " + res.status);
+    payload = await res.json();
+  } catch (e) {
+    errEl.textContent = "Could not load data/flights.json — has the workflow run yet? (" + e.message + ")";
+    return;
+  }
+
+  const days = payload.days || {};
+  const meta = payload.meta || {};
+
+  // Determine month/year from meta or infer from first key
+  const [y, m] = (meta.month || Object.keys(days)[0]?.slice(0, 7) || "2026-11").split("-").map(Number);
+  const firstDow = new Date(y, m - 1, 1).getDay(); // 0=Sun
+  const lastDay = new Date(y, m, 0).getDate();
+
+  // Stats
+  const priced = Object.entries(days)
+    .filter(([, v]) => v && typeof v.price === "number")
+    .map(([k, v]) => ({ date: k, ...v }));
+  priced.sort((a, b) => a.price - b.price);
+
+  const best = priced[0];
+  const prices = priced.map((p) => p.price);
+  const cheap = prices[Math.floor(prices.length / 3)] ?? Infinity;
+  const mid = prices[Math.floor((2 * prices.length) / 3)] ?? Infinity;
+
+  const fmt = (n) => "$" + Math.round(n).toLocaleString();
+  const daysWith = priced.length;
+  const daysWithout = Object.values(days).filter((v) => v === null).length;
+  const avg = prices.length ? prices.reduce((a, b) => a + b, 0) / prices.length : 0;
+
+  statsEl.innerHTML = `
+    <div class="stat"><div class="label">Cheapest day</div><div class="value">${best ? fmt(best.price) + " · " + best.date.slice(5) : "—"}</div></div>
+    <div class="stat"><div class="label">Median</div><div class="value">${prices.length ? fmt(prices[Math.floor(prices.length / 2)]) : "—"}</div></div>
+    <div class="stat"><div class="label">Average</div><div class="value">${prices.length ? fmt(avg) : "—"}</div></div>
+    <div class="stat"><div class="label">Days with fare &lt; 18h</div><div class="value">${daysWith} / ${daysWith + daysWithout}</div></div>
+  `;
+
+  // Build 6-row calendar grid (enough for any month)
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  let dayNum = 1;
+  const rows = [];
+  for (let r = 0; r < 6; r++) {
+    const tds = [];
+    for (let c = 0; c < 7; c++) {
+      if ((r === 0 && c < firstDow) || dayNum > lastDay) {
+        tds.push(`<td class="cell empty"></td>`);
+        continue;
+      }
+      const key = `${y}-${String(m).padStart(2, "0")}-${String(dayNum).padStart(2, "0")}`;
+      const cellDate = new Date(y, m - 1, dayNum);
+      const entry = days[key];
+      const isPast = cellDate < today;
+      let cls = "cell";
+      let html;
+      if (!entry) {
+        cls += " none";
+        html = `<div class="d">${dayNum}</div><div class="p">—</div><div class="m">no &lt;18h fare</div>`;
+      } else {
+        const bucket = entry.price <= cheap ? "cheap" : entry.price <= mid ? "mid" : "exp";
+        cls += " " + bucket + " clickable";
+        if (best && key === best.date) cls += " best";
+        const dur = entry.duration_hours;
+        const stops = entry.stops === 0 ? "nonstop" : entry.stops + (entry.stops === 1 ? " stop" : " stops");
+        html = `<div class="d">${dayNum}${best && key === best.date ? ' <span class="pill">best</span>' : ""}</div>
+                <div class="p">${fmt(entry.price)}</div>
+                <div class="m">${dur}h · ${stops}</div>`;
+      }
+      if (isPast) cls += " past";
+      tds.push(`<td class="${cls}" data-key="${key}">${html}</td>`);
+      dayNum++;
+    }
+    rows.push(`<tr>${tds.join("")}</tr>`);
+    if (dayNum > lastDay) break;
+  }
+  calBody.innerHTML = rows.join("");
+
+  // Click interactions
+  calBody.addEventListener("click", (ev) => {
+    const td = ev.target.closest("td.cell.clickable");
+    if (!td) return;
+    const key = td.getAttribute("data-key");
+    const e = days[key];
+    if (!e) return;
+    const carriers = (e.carriers || []).join(", ") || "—";
+    detailEl.classList.add("show");
+    detailEl.innerHTML = `
+      <div class="row">
+        <div class="field"><div class="k">Date</div><div class="v">${key}</div></div>
+        <div class="field"><div class="k">Price</div><div class="v">${fmt(e.price)} ${e.currency || ""}</div></div>
+        <div class="field"><div class="k">Duration</div><div class="v">${e.duration_hours}h</div></div>
+        <div class="field"><div class="k">Stops</div><div class="v">${e.stops}</div></div>
+        <div class="field"><div class="k">Carriers</div><div class="v">${carriers}</div></div>
+        <div class="field"><div class="k">Depart</div><div class="v">${e.depart_time || "—"}</div></div>
+        <div class="field"><div class="k">Arrive</div><div class="v">${e.arrive_time || "—"}</div></div>
+        <div class="field"><div class="k">Search</div><div class="v"><a href="${e.deep_link}" target="_blank" rel="noopener">Open on Google Flights ↗</a></div></div>
+      </div>
+    `;
+  });
+
+  // Footer
+  const gen = meta.generated_at_utc ? new Date(meta.generated_at_utc) : null;
+  const apiName = (meta.api || "duffel").charAt(0).toUpperCase() + (meta.api || "duffel").slice(1);
+  metaEl.textContent = `Origin ${meta.origin || "SFO"} → ${meta.destination || "CAN"} · max ${meta.max_duration_hours || 18}h · data via ${apiName} (${meta.api_env || "test"}) · generated ${gen ? gen.toLocaleString() : "—"}`;
+  if (meta.errors && meta.errors.length) {
+    errEl.textContent = `${meta.errors.length} date(s) errored during last refresh — see data/flights.json.`;
+  }
+})();
+</script>
+</body>
+</html>
